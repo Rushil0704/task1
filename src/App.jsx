@@ -34,14 +34,6 @@ const App = () => {
 			</div>
 		);
 
-	// Error
-	if (error)
-		return (
-			<div className="flex items-center justify-center h-screen bg-red-100 text-red-600 font-semibold">
-				Error: {error}
-			</div>
-		);
-
 	// Filter logic
 	const filteredData = data.filter((item) => {
 		if (!search) return true;
@@ -104,32 +96,39 @@ const App = () => {
 								</th>
 							</tr>
 						</thead>
-						<tbody>
-							{paginatedData.map((item) => (
-								<tr key={item.id} className="hover:bg-gray-50">
-									<td className="px-4 py-2 border">
-										{item.id}
-									</td>
-									<td className="px-4 py-2 border">
-										{item.service_name}
-									</td>
-									<td className="px-4 py-2 border">
-										{item.service_time
-											? `${item.service_time.days}d ${item.service_time.hours}h ${item.service_time.minutes}m`
-											: "N/A"}
-									</td>
-									<td className="px-4 py-2 border">
-										₹{item.price}
-									</td>
-									<td className="px-4 py-2 border">
-										{item.discount}%
-									</td>
-									<td className="px-4 py-2 border">
-										{item.area}
-									</td>
-								</tr>
-							))}
-						</tbody>
+						{error ? (
+							<p className="text-center">No data Found</p>
+						) : (
+							<tbody>
+								{paginatedData.map((item) => (
+									<tr
+										key={item.id}
+										className="hover:bg-gray-50"
+									>
+										<td className="px-4 py-2 border">
+											{item.id}
+										</td>
+										<td className="px-4 py-2 border">
+											{item.service_name}
+										</td>
+										<td className="px-4 py-2 border">
+											{item.service_time
+												? `${item.service_time.days}d ${item.service_time.hours}h ${item.service_time.minutes}m`
+												: "N/A"}
+										</td>
+										<td className="px-4 py-2 border">
+											₹{item.price}
+										</td>
+										<td className="px-4 py-2 border">
+											{item.discount}%
+										</td>
+										<td className="px-4 py-2 border">
+											{item.area}
+										</td>
+									</tr>
+								))}
+							</tbody>
+						)}
 					</table>
 				</div>
 
